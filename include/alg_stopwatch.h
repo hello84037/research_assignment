@@ -22,6 +22,7 @@ private:
 public:
   StopWatch();
   double elapsed_time();
+  double elapsed_time_milli_seconds();
   void reset();
 };
 

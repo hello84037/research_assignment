@@ -20,6 +20,13 @@ double StopWatch::elapsed_time()
   return running_time.count();
 }
 
+double StopWatch::elapsed_time_milli_seconds()
+{
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double, std::milli> running_time = end - start;
+  return running_time.count();
+}
+
 void StopWatch::reset()
 {
   start = std::chrono::high_resolution_clock::now();
