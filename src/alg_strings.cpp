@@ -226,3 +226,82 @@ int RabinKarp::search(const std::string &txt) const
 
   return n; // no match
 }
+
+/******************************************************************************
+ *  Class: KMP
+ *  A class implementing the Knuth-Morris-Pratt algorithm
+ ******************************************************************************/
+KMP::KMP(const std::string &pat) : pat(pat) {}
+
+// Preprocesses the pattern to create the prefix function
+std::vector<int> KMP::computePrefixFunction(const std::string &pattern) const
+{
+  int m = pattern.length();
+  std::vector<int> prefix(m);
+  prefix[0] = 0;
+  int k = 0;
+
+  // Go through the pattern and compute the prefix
+  for (int q = 1; q < m; q++)
+  {
+    // While we have a mismatch and we can fall back
+    while (k > 0 && pattern[k] != pattern[q])
+    {
+      k = prefix[k - 1];
+    }
+
+    // If we have a match, we can extend the current prefix
+    if (pattern[k] == pattern[q])
+    {
+      k++;
+    }
+
+    // Save the value in the prefix array
+    prefix[q] = k;
+  }
+
+  return prefix;
+}
+
+// Searches for the pattern in the given text using the KMP algorithm
+int KMP::search(const std::string &txt) const
+{
+  int n = txt.length();
+  int m = pat.length();
+  std::vector<int> prefix = computePrefixFunction(pat);
+  std::vector<int> result;
+
+  int i = 0; // index for txt
+  int j = 0; // index for pat
+  while (i < n)
+  {
+    // If the characters match, advance both indices
+    if (pat[j] == txt[i])
+    {
+      i++;
+      j++;
+
+      // if the entire pattern is found, store the index
+      if (j == m)
+      {
+        result.push_back(i - j);
+        j = prefix[j - 1];
+      }
+    }
+    // If there is a mismatch
+    else
+    {
+      // Use the prefix value of the previous index to avoid unnecessary comparisons
+      if (j != 0)
+      {
+        j = prefix[j - 1];
+      }
+      else
+      {
+        i++;
+      }
+    }
+  }
+
+  return result.empty() ? n : result[0];
+}

@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "alg_graphs.h"
 
 /******************************************************************************
@@ -50,6 +51,17 @@ private:
 
 public:
   RabinKarp(const std::string &pat);
+  int search(const std::string &txt) const;
+};
+
+class KMP
+{
+private:
+  std::string pat;
+  std::vector<int> computePrefixFunction(const std::string &pattern) const;
+
+public:
+  KMP(const std::string &pat);
   int search(const std::string &txt) const;
 };
 
