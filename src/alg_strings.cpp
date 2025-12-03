@@ -241,16 +241,16 @@ std::vector<int> KMP::computePrefixFunction(const std::string &pattern) const
   prefix[0] = 0;
   int k = 0;
 
-  // Go through the pattern and compute the prefix
+  // Go through the pattern and compute the prefix.
   for (int q = 1; q < m; q++)
   {
-    // While we have a mismatch and we can fall back
+    // While there is a mismatch and we can fall back.
     while (k > 0 && pattern[k] != pattern[q])
     {
       k = prefix[k - 1];
     }
 
-    // If we have a match, we can extend the current prefix
+    // If there is a match, extend the current prefix.
     if (pattern[k] == pattern[q])
     {
       k++;

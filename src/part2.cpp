@@ -4,8 +4,7 @@
 
 int main()
 {
-  // TODO: Replace this line with actual logic
-  std::cout << "Part 2: TODO" << std::endl;
+  std::cout << "Part 2: Not using this for final project" << std::endl;
 
   return 0;
 }

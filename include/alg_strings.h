@@ -54,6 +54,10 @@ public:
   int search(const std::string &txt) const;
 };
 
+/******************************************************************************
+ *  Class: KMP
+ *  A class implementing the Knuth-Morris-Pratt algorithm
+ ******************************************************************************/
 class KMP
 {
 private:

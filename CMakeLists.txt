@@ -22,6 +22,7 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tester1 test/tester1.cpp ${ALG_CPP})
 target_link_libraries(tester1 PRIVATE Catch2::Catch2WithMain)
+target_compile_definitions(tester1 PRIVATE UNIT_TESTING)
 
 add_executable(tester2 test/tester2.cpp ${ALG_CPP})
 target_link_libraries(tester2 PRIVATE Catch2::Catch2WithMain)
